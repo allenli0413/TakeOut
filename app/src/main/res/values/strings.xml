@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TakeOut</string>
+    <string name="bottom_home">首页</string>
+    <string name="bottom_order">订单</string>
+    <string name="bottom_me">个人</string>
+    <string name="bottom_more">更多</string>
+</resources>
