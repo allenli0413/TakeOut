@@ -23,7 +23,8 @@ class GoodsTypeListAdapter(val goodsTypeList: List<GoodsTypeInfo>, val fragment:
         context = fragment.activity!!
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsTypeViewHolder = GoodsTypeViewHolder(GoodsTypeListItemView(context))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsTypeViewHolder
+            = GoodsTypeViewHolder(GoodsTypeListItemView(context))
 
     override fun getItemCount(): Int = goodsTypeList.size
 

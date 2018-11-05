@@ -25,10 +25,10 @@ import javax.inject.Inject
  * @time  15 时 12 分
  * @descrip :
  */
-class OrderFragment: Fragment() {
+class OrderFragment : Fragment() {
     @Inject
     lateinit var presenter: OrderFragmentPresenter
-
+    var isFirst = true
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         DaggerOrderFragmentComponent.builder().orderFragmentModule(OrderFragmentModule(this)).build().inject(this)
         return inflater.inflate(R.layout.fragment_order, null)
@@ -43,7 +43,7 @@ class OrderFragment: Fragment() {
 
     private fun initListener() {
         srl_order?.apply {
-            setColorSchemeColors(Color.RED, Color.YELLOW,Color.GREEN)
+            setColorSchemeColors(Color.RED, Color.YELLOW, Color.GREEN)
             setOnRefreshListener {
                 requestDatas()
             }
@@ -54,13 +54,13 @@ class OrderFragment: Fragment() {
         rv_order_list?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = OrderListAdapter(context,presenter.orderList)
+            adapter = OrderListAdapter(context, presenter.orderList)
         }
     }
 
     fun onFailed(msg: String) {
         srl_order.isRefreshing = false
-        toast("请求数据失败：$msg" )
+        toast("请求数据失败：$msg")
     }
 
     fun onSuccess() {
@@ -76,7 +76,10 @@ class OrderFragment: Fragment() {
     fun requestDatas() {
         if (userInfo == null) {
             toast("您还没有登录，请先登录")
-            activity.startActivity<LoginActivity>()
+            if (isFirst) {
+                activity.startActivity<LoginActivity>()
+                isFirst = false;
+            }
         } else {
             presenter.getOrderList(userInfo!!.id.toString())
         }

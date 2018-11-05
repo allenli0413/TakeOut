@@ -2,7 +2,9 @@ package com.liyh.takeout.presenter
 
 import com.liyh.takeout.model.bean.GoodsInfo
 import com.liyh.takeout.model.bean.GoodsTypeInfo
+import com.liyh.takeout.ui.activity.BusinessActivity
 import com.liyh.takeout.ui.fragment.GoodsFragment
+import com.liyh.takeout.utils.TakeoutApp
 import org.jetbrains.anko.info
 
 /**
@@ -25,8 +27,15 @@ class GoodsFragmentPresenter(val goodsFragment: GoodsFragment) : BaseNetPresente
         goodsTypeList.addAll(data)
         info { goodsList.toString() }
         goodsList.clear()
-        goodsTypeList.forEach {goodsTypeInfo ->
+        val businessActivity = goodsFragment.activity as BusinessActivity
+        goodsTypeList.forEach { goodsTypeInfo ->
+            if (businessActivity.hasSelectedInfo) {
+                goodsTypeInfo.cartCount = TakeoutApp.instance.queryCacheSelectedInfoByTypeId(goodsTypeInfo.id)
+            }
             goodsTypeInfo.list.forEach { goodsInfo ->
+                if (goodsTypeInfo.cartCount > 0) {
+                    goodsInfo.selectCount = TakeoutApp.instance.queryCacheSelectedInfoByGoodsId(goodsInfo.id)
+                }
                 goodsInfo.typeId = goodsTypeInfo.id
                 goodsInfo.typeName = goodsTypeInfo.name
             }
@@ -44,7 +53,7 @@ class GoodsFragmentPresenter(val goodsFragment: GoodsFragment) : BaseNetPresente
      */
     fun getPositionByTypeId(id: Int): Int {
         goodsList.forEachIndexed { index, goodsInfo ->
-            if (goodsInfo.typeId == id){
+            if (goodsInfo.typeId == id) {
                 return index
             }
         }
@@ -61,5 +70,33 @@ class GoodsFragmentPresenter(val goodsFragment: GoodsFragment) : BaseNetPresente
             }
         }
         return -1
+    }
+
+    //购物车集合
+    private val cartList = arrayListOf<GoodsInfo>()
+
+    /**
+     * 获取购物车商品集合
+     */
+    fun getCartList(): ArrayList<GoodsInfo> {
+        cartList.clear()
+        goodsList.forEach {
+            if (it.selectCount > 0) {
+                cartList.add(it)
+            }
+        }
+        return cartList
+    }
+
+    /**
+     * 清空购物车数据
+     */
+    fun clearCartList() {
+        if (cartList.isNotEmpty()) {
+            cartList.forEach {
+                it.selectCount = 0
+            }
+        }
+        cartList.clear()
     }
 }

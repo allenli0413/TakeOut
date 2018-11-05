@@ -11,7 +11,7 @@ class GoodsTypeInfo {
     var name: String = "" //商品类型名称
     var info: String = ""  //特价信息
     var list: List<GoodsInfo> = listOf() //商品列表
-    var cartCount: Int = 1
+    var cartCount: Int = 0
     var isSelected: Boolean = false
     override fun toString(): String {
         return "GoodsTypeInfo(id=$id, name='$name', info='$info', list=$list)"

@@ -12,6 +12,7 @@ import com.liyh.takeout.R
 import com.liyh.takeout.dagger2.component.DaggerGoodsFragmentComponent
 import com.liyh.takeout.dagger2.module.GoodsFragmentModule
 import com.liyh.takeout.presenter.GoodsFragmentPresenter
+import com.liyh.takeout.ui.activity.BusinessActivity
 import com.liyh.takeout.ui.adapter.GoodsListAdapter
 import com.liyh.takeout.ui.adapter.GoodsTypeListAdapter
 import kotlinx.android.synthetic.main.fragment_goods.*
@@ -41,9 +42,9 @@ class GoodsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val sellerId = activity?.intent?.getStringExtra("id")
+        val sellerId = (activity as BusinessActivity).mSeller.id.toString()
         if (!TextUtils.isEmpty(sellerId)) {
-            presenter.getGoodsInfo(sellerId!!)
+            presenter.getGoodsInfo(sellerId)
         }
         rv_goods_type.run {
             setHasFixedSize(true)
@@ -52,7 +53,7 @@ class GoodsFragment : Fragment() {
             adapter = goodsTypeListAdapter
         }
         goodsListView = slhlv
-        goodsListAdapter = GoodsListAdapter(activity!!, presenter.goodsList)
+        goodsListAdapter = GoodsListAdapter(this, presenter.goodsList)
         goodsListView.adapter = goodsListAdapter
     }
 
@@ -64,14 +65,22 @@ class GoodsFragment : Fragment() {
     fun onSuccess() {
         goodsTypeListAdapter.notifyDataSetChanged()
         goodsListAdapter.notifyDataSetChanged()
-        goodsListView.setOnScrollListener(object : AbsListView.OnScrollListener{
+        goodsListView.setOnScrollListener(object : AbsListView.OnScrollListener {
             override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-                val oldPosition  = goodsTypeListAdapter.getSelectPosition()
+                val oldPosition = goodsTypeListAdapter.getSelectPosition()
                 val typeId = presenter.goodsList[firstVisibleItem].typeId
                 val newPostion: Int = presenter.getTypePositionById(typeId)
                 if (oldPosition != newPostion) {
                     goodsTypeListAdapter.setSelected(presenter.goodsTypeList[newPostion])
-                    rv_goods_type.scrollToPosition(newPostion + 3)
+                    if (newPostion <= 3 || newPostion >= presenter.goodsTypeList.size - 3) {
+                        rv_goods_type.scrollToPosition(newPostion)
+                    } else {
+                        if (newPostion > oldPosition) {
+                            rv_goods_type.scrollToPosition(newPostion + 3)
+                        } else {
+                            rv_goods_type.scrollToPosition(newPostion - 3)
+                        }
+                    }
                 }
             }
 
@@ -79,5 +88,7 @@ class GoodsFragment : Fragment() {
             }
 
         })
+        //更新购物车UI
+        (activity as BusinessActivity).updateCartCount()
     }
 }

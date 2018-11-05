@@ -36,6 +36,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '28.0.3'
 }
 // 在MobSDK的扩展中注册SMSSDK的相关信息
 //Appkey : 271fb5cfcd2a0 | App Secret : 53fb368f033e3c844de42864b30a47c6
@@ -78,6 +79,6 @@ dependencies {
     implementation 'com.flipboard:bottomsheet-core:1.5.3'
     implementation 'com.flipboard:bottomsheet-commons:1.5.3'
     // optional
-//    implementation 'com.android.support:support-v13:27.1.0'
+    //    implementation 'com.android.support:support-v13:27.1.0'
     implementation 'se.emilsjolander:stickylistheaders:2.7.0'
 }

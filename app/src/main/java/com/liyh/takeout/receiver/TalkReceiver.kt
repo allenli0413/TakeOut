@@ -46,12 +46,12 @@ class TalkReceiver : BroadcastReceiver() {
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED == intent?.getAction()) {
             Log.d(TAG, "接受到推送下来的通知")
 
-//            receivingNotification(context, bundle)
+//            receivingNotification(goodsFragment, bundle)
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED == intent?.getAction()) {
             Log.d(TAG, "用户点击打开了通知")
 
-//            openNotification(context, bundle)
+//            openNotification(goodsFragment, bundle)
 
         } else {
             Log.d(TAG, "Unhandled intent - " + intent?.getAction())

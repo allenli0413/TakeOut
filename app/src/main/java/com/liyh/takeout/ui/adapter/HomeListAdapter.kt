@@ -8,6 +8,7 @@ import com.heima.takeout.model.beans.Seller
 import com.liyh.takeout.ui.activity.BusinessActivity
 import com.liyh.takeout.ui.views.HomeListSellerItemView
 import com.liyh.takeout.ui.views.HomeListTitleItemView
+import com.liyh.takeout.utils.TakeoutApp
 import org.jetbrains.anko.startActivity
 
 /**
@@ -37,10 +38,16 @@ class HomeListAdapter(val content: Context, val list: ArrayList<Seller>, val img
         val viewType = getItemViewType(position)
         if (viewType == ITEM_TYPE_SELLER) {
             val itemView = holder.itemView as HomeListSellerItemView
-            val itemData = list[position]
+            val itemData = list[position - 1]
             itemView.setData(itemData)
             itemView.setOnClickListener {
-                content.startActivity<BusinessActivity>("id" to itemData.id.toString())
+                var hasSelectedInfo = false
+                val selectedcount = TakeoutApp.instance.queryCacheSelectedInfoBySellerId(itemData.id.toInt())
+                if (selectedcount > 0) {
+                    hasSelectedInfo = true
+                }
+                content.startActivity<BusinessActivity>("hasSelectedInfo" to hasSelectedInfo
+                        , "seller" to itemData)
             }
         } else {
             val itemView = holder.itemView as HomeListTitleItemView

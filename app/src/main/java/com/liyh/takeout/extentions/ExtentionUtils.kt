@@ -16,7 +16,7 @@ import android.view.ViewConfiguration
 
 fun String.isValidPhone(): Boolean = this.matches(Regex("^[1][35678]\\d{9}"))
 
-fun String.isValidCode(): Boolean = !this.isNullOrEmpty() and (this.length >= 4)
+fun String.isValidCode(): Boolean = !isNullOrEmpty() and (this.length >= 4)
 fun Activity.isNavigationBarShow(): Boolean =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             val display = getWindowManager().getDefaultDisplay()

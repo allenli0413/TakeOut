@@ -1,10 +1,10 @@
 package com.liyh.takeout.ui.adapter
 
-import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.liyh.takeout.model.bean.GoodsInfo
+import com.liyh.takeout.ui.fragment.GoodsFragment
 import com.liyh.takeout.ui.listener.On2ItemClickListener
 import com.liyh.takeout.ui.views.GoodsListItemView
 import com.liyh.takeout.ui.views.GoodsTitleListItemView
@@ -16,14 +16,14 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter
  * @time  21 时 42 分
  * @descrip :
  */
-class GoodsListAdapter(val context: Context, val goodsList: List<GoodsInfo>) : BaseAdapter(), StickyListHeadersAdapter {
+class GoodsListAdapter(val goodsFragment: GoodsFragment, val goodsList: List<GoodsInfo>) : BaseAdapter(), StickyListHeadersAdapter {
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view: View
         var holder: GoodsListViewHolder
         if (convertView == null) {
-            view = GoodsListItemView(context)
+            view = GoodsListItemView(goodsFragment.activity)
             holder = GoodsListViewHolder(view)
             view.tag = holder
         } else {
@@ -37,15 +37,28 @@ class GoodsListAdapter(val context: Context, val goodsList: List<GoodsInfo>) : B
             override fun onFirstItemClick(position: Int, obj: Any?) {//减号
                 itemData.selectCount--
                 notifyDataSetChanged()
+                updateGoodsTypeRed(itemData, false)
             }
 
             override fun onSecondItemClick(position: Int, obj: Any?) {//加号
                 itemData.selectCount++
                 notifyDataSetChanged()
+                updateGoodsTypeRed(itemData, true)
             }
 
         })
         return view
+    }
+
+    fun updateGoodsTypeRed(itemData: GoodsInfo, isAdd: Boolean) {
+        val position = goodsFragment.presenter.getTypePositionById(itemData.typeId)
+        val goodsTypeInfo = goodsFragment.presenter.goodsTypeList[position]
+        if (isAdd) {
+            goodsTypeInfo.cartCount++
+        } else {
+            goodsTypeInfo.cartCount--
+        }
+        goodsFragment.goodsTypeListAdapter.notifyDataSetChanged()
     }
 
     override fun getItem(position: Int): GoodsInfo = goodsList[position]
@@ -60,7 +73,7 @@ class GoodsListAdapter(val context: Context, val goodsList: List<GoodsInfo>) : B
         var view: View
         var holder: GoodsTitleListViewHolder
         if (convertView == null) {
-            view = GoodsTitleListItemView(context)
+            view = GoodsTitleListItemView(goodsFragment.activity)
             holder = GoodsTitleListViewHolder(view)
             view.tag = holder
         } else {
