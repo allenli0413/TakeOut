@@ -1,5 +1,7 @@
 package com.liyh.takeout.utils
 
+import android.content.Context
+import android.support.multidex.MultiDex
 import cn.jpush.android.api.JPushInterface
 import com.liyh.takeout.model.bean.CacheSelectedInfo
 import com.liyh.takeout.model.bean.UserInfo
@@ -89,5 +91,10 @@ class TakeoutApp : MobApplication() {
                 }
             }
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

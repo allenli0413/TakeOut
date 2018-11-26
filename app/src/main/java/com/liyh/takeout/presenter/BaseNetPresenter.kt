@@ -100,7 +100,7 @@ abstract class BaseNetPresenter<T> : AnkoLogger {
         newBuilder.addInterceptor(loggerInterceptor)
         val retrofit = Retrofit.Builder()
                 .client(newBuilder.build())
-                .baseUrl("http://10.200.0.205:8000")
+                .baseUrl("http://10.200.0.134:8000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()

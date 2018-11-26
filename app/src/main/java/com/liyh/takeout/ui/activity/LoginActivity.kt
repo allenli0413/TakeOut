@@ -96,6 +96,7 @@ class LoginActivity : AppCompatActivity() {
         SMSSDK.unregisterEventHandler(eventHandler)
         timer.cancel()
         timer.onFinish()
+//        presenter.onDestroy()
     }
 
     fun hideSoftKeyBoard() {
@@ -107,6 +108,7 @@ class LoginActivity : AppCompatActivity() {
         val phoneNum = et_user_phone.text.toString().trim()
         presenter.getUserInfo(phoneNum)
     }
+
     inner class MyCountDownTimer(millisInFuture: Long, countDownInterval: Long) : CountDownTimer(millisInFuture, countDownInterval) {
         // 参数依次为总时长,和计时的时间间隔
 
@@ -122,4 +124,5 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
 }

@@ -5,8 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.liyh.takeout.model.bean.OrderInfo
+import com.liyh.takeout.ui.activity.MainActivity
+import com.liyh.takeout.ui.activity.OrderDetailActivity
 import com.liyh.takeout.ui.views.OrderListItemView
 import com.liyh.takeout.utils.OrderObservable
+import org.jetbrains.anko.startActivity
 import org.json.JSONObject
 import java.util.*
 
@@ -16,7 +19,7 @@ import java.util.*
  * @time  14 时 41 分
  * @descrip :
  */
-class OrderListAdapter(val context: Context, val orderList: List<OrderInfo>) : RecyclerView.Adapter<OrderListAdapter.OrderListViewHolder>(),Observer {
+class OrderListAdapter(val context: Context, val orderList: List<OrderInfo>) : RecyclerView.Adapter<OrderListAdapter.OrderListViewHolder>(), Observer {
     override fun update(o: Observable?, arg: Any?) {
         arg?.apply {
             val jsonObject = JSONObject(arg as String)
@@ -43,6 +46,11 @@ class OrderListAdapter(val context: Context, val orderList: List<OrderInfo>) : R
         val itemView = holder.itemView as OrderListItemView
         val data = orderList[position]
         itemView.bindData(data)
+        itemView.setOnClickListener {
+            (context as MainActivity).startActivity<OrderDetailActivity>("orderId" to data.id,
+                    "type" to data.type)
+
+        }
     }
 
 

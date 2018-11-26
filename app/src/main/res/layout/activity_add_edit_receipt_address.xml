@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#f5f6f6f9"
-              android:orientation="vertical">
+    android:id="@+id/ll_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f6f6f9"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="#468ade"
-        android:paddingBottom="15dp"
-        android:paddingTop="30dp">
+        android:paddingTop="30dp"
+        android:paddingBottom="15dp">
 
         <ImageButton
             android:id="@+id/ib_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
+            android:background="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -27,7 +28,7 @@
             android:layout_toRightOf="@+id/ib_back"
             android:text="新增地址"
             android:textColor="#fff"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/ib_delete"
@@ -36,7 +37,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/address_icon_delete"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </RelativeLayout>
 
 
@@ -54,7 +55,7 @@
             android:layout_marginLeft="10dp"
             android:text="联系人"
             android:textColor="#000"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/et_name"
@@ -65,7 +66,7 @@
             android:background="@null"
             android:hint="你的姓名"
             android:maxLines="1"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
 
     </RelativeLayout>
@@ -90,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="先生"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <RadioButton
                 android:id="@+id/rb_women"
@@ -98,7 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="女士"
-                android:textSize="14sp"/>
+                android:checked="true"
+                android:textSize="14sp" />
         </RadioGroup>
     </RelativeLayout>
 
@@ -115,7 +117,7 @@
             android:layout_marginLeft="10dp"
             android:text="联系电话"
             android:textColor="#000"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/et_phone"
@@ -128,7 +130,8 @@
             android:hint="你的手机号"
             android:inputType="phone"
             android:maxLines="1"
-            android:textSize="14sp"/>
+            android:maxLength="11"
+            android:textSize="14sp" />
 
         <ImageButton
             android:id="@+id/ib_delete_phone"
@@ -138,8 +141,7 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/ib_add_phone_other"
             android:background="@drawable/icon_close"
-            android:visibility="invisible"
-            />
+            android:visibility="invisible" />
 
         <ImageButton
             android:id="@+id/ib_add_phone_other"
@@ -148,8 +150,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/address_icon_reserve"
-            />
+            android:background="@drawable/address_icon_reserve" />
 
     </RelativeLayout>
 
@@ -172,7 +173,8 @@
             android:hint="备选电话"
             android:inputType="phone"
             android:maxLines="1"
-            android:textSize="14sp"/>
+            android:maxLength="11"
+            android:textSize="14sp" />
 
         <ImageButton
             android:id="@+id/ib_delete_phone_other"
@@ -182,8 +184,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/icon_close"
-            android:visibility="invisible"
-            />
+            android:visibility="invisible" />
 
     </RelativeLayout>
 
@@ -201,8 +202,7 @@
             android:layout_marginLeft="10dp"
             android:text="收货地址"
             android:textColor="#000"
-            android:textSize="12sp"
-            />
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/et_receipt_address"
@@ -213,7 +213,7 @@
             android:background="@null"
             android:hint="小区/写字楼/学校"
             android:maxLines="1"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -227,8 +227,7 @@
             android:id="@+id/btn_location_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="一键定位选址"
-            ></Button>
+            android:text="一键定位选址"></Button>
 
         <EditText
             android:id="@+id/et_detail_address"
@@ -240,7 +239,7 @@
             android:background="@null"
             android:hint="详细地址(如门牌号等)"
             android:maxLines="1"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -257,8 +256,7 @@
             android:layout_marginLeft="10dp"
             android:text="标签"
             android:textColor="#000"
-            android:textSize="12sp"
-            />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_label"
@@ -272,8 +270,7 @@
             android:padding="3dp"
             android:text=""
             android:textColor="#666"
-            android:textSize="10sp"
-            />
+            android:textSize="10sp" />
 
         <ImageView
             android:id="@+id/ib_select_label"
@@ -282,8 +279,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:src="@drawable/address_icon_down"
-            />
+            android:src="@drawable/address_icon_down" />
 
     </RelativeLayout>
 
@@ -294,5 +290,5 @@
         android:layout_margin="10dp"
         android:background="#02c14b"
         android:text="确定"
-        android:textColor="#fff"/>
+        android:textColor="#fff" />
 </LinearLayout>

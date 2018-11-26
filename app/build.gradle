@@ -17,7 +17,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         applicationId "com.liyh.takeout" //JPush上注册的包名.
-
+        // 设置支持multidex
+        multiDexEnabled true
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
@@ -81,4 +82,13 @@ dependencies {
     // optional
     //    implementation 'com.android.support:support-v13:27.1.0'
     implementation 'se.emilsjolander:stickylistheaders:2.7.0'
+    implementation 'com.android.support:multidex:1.0.1'
+    //3D地图so及jar
+//    implementation 'com.amap.api:3dmap:latest.integration'
+    implementation 'com.amap.api:map2d:latest.integration'
+
+    //定位功能
+    implementation 'com.amap.api:location:latest.integration'
+    //搜索功能
+    implementation 'com.amap.api:search:latest.integration'
 }

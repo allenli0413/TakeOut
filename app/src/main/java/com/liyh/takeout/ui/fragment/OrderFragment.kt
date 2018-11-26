@@ -55,6 +55,7 @@ class OrderFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = OrderListAdapter(context, presenter.orderList)
+
         }
     }
 

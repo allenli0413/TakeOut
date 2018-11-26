@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_layout_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
@@ -9,15 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="#468ade"
-        android:paddingBottom="15dp"
-        android:paddingTop="30dp">
+        android:paddingTop="30dp"
+        android:paddingBottom="15dp">
 
         <ImageButton
             android:id="@+id/ib_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/abc_ic_ab_back_mtrl_am_alpha"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -32,30 +33,31 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_receipt_address"
         android:layout_width="match_parent"
-        android:background="#c6c6c9"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="#c6c6c9">
 
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
+        android:id="@+id/ll_bottom_btn"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-
         android:gravity="center">
 
 
         <ImageButton
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/address_add_btn_icon"/>
+            android:background="@drawable/address_add_btn_icon" />
+
         <TextView
             android:id="@+id/tv_add_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="新增地址"
             android:textColor="#46b3de"
-            android:layout_marginLeft="10dp"
             android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

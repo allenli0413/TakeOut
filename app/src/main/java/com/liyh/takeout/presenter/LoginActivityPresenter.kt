@@ -17,6 +17,8 @@ import java.sql.Savepoint
  * @descrip :
  */
 class LoginActivityPresenter(val loginActivity: LoginActivity) : BaseNetPresenter<UserInfo>() {
+
+    lateinit var dbHelper: TakeoutDbHelper
     override fun onFailed(msg: String) {
         uiThread {
             loginActivity.onFailed(msg)
@@ -30,7 +32,7 @@ class LoginActivityPresenter(val loginActivity: LoginActivity) : BaseNetPresente
         var dbConnection: AndroidDatabaseConnection? = null
         var startPoint: Savepoint? = null
         try {
-            val dbHelper = TakeoutDbHelper(loginActivity)
+            dbHelper = TakeoutDbHelper(loginActivity)
             val useDao = dbHelper.getDao<Dao<UserInfo, Int>, UserInfo>(UserInfo::class.java)
 //        useDao.create(data)
 //        useDao.createOrUpdate(data)
@@ -67,5 +69,9 @@ class LoginActivityPresenter(val loginActivity: LoginActivity) : BaseNetPresente
     fun getUserInfo(phone: String) {
         val observable = takeOutService.getLoginInfo(phone)
         request(observable)
+    }
+
+    fun onDestroy(){
+        dbHelper.close()
     }
 }

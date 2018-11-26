@@ -6,6 +6,7 @@ import android.os.Build
 import android.view.KeyCharacterMap
 import android.view.KeyEvent
 import android.view.ViewConfiguration
+import android.widget.TextView
 
 /**
  * @author  Yahri Lee
@@ -30,3 +31,4 @@ fun Activity.isNavigationBarShow(): Boolean =
             val back = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
             !(menu || back)
         }
+fun TextView.getContent(): String = text.toString().trim()
