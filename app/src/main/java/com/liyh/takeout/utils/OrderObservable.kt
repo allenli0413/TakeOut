@@ -1,5 +1,7 @@
 package com.liyh.takeout.utils
 
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import java.util.*
 
 /**
@@ -8,7 +10,7 @@ import java.util.*
  * @time  15 时 21 分
  * @descrip :被观察者
  */
-class OrderObservable private constructor() : Observable() {
+class OrderObservable private constructor() : Observable(), AnkoLogger {
     companion object {
         val instance = OrderObservable()
         /* 订单状态
@@ -27,6 +29,7 @@ class OrderObservable private constructor() : Observable() {
     }
 
     fun newMsgComing(extraString: String) {
+        info { "极光推送:$extraString" }
         //从广播接收者接收到消息
         //通知所有观察者
         setChanged()

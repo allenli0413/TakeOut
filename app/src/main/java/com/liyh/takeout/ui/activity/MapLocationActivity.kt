@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -79,7 +80,7 @@ class MapLocationActivity : AppCompatActivity(), AMapLocationListener, PoiSearch
         map = mMapView.map
         var myLocationStyle = MyLocationStyle()
         myLocationStyle.interval(2000)
-        myLocationStyle.strokeWidth(200f)
+        myLocationStyle.strokeWidth(1f)
         map.setMyLocationStyle(myLocationStyle)
         map.isMyLocationEnabled = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -118,5 +119,23 @@ class MapLocationActivity : AppCompatActivity(), AMapLocationListener, PoiSearch
             toast("权限被拒绝，无法使用定位服务")
         }
     }
+    override fun onResume() {
+        super.onResume()
+        mMapView.onResume()
+    }
 
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        mMapView.onSaveInstanceState(outState)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mMapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mMapView.onDestroy()
+    }
 }

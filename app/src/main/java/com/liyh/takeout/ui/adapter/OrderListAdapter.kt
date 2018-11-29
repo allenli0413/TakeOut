@@ -23,7 +23,7 @@ class OrderListAdapter(val context: Context, val orderList: List<OrderInfo>) : R
     override fun update(o: Observable?, arg: Any?) {
         arg?.apply {
             val jsonObject = JSONObject(arg as String)
-            val pushId = jsonObject.getString("id")
+            val pushId = jsonObject.getString("orderId")
             val pushType = jsonObject.getString("type")
             orderList.forEachIndexed { index, orderInfo ->
                 if (orderInfo.id == pushId) {
