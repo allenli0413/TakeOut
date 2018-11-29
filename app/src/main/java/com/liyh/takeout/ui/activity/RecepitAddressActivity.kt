@@ -45,6 +45,9 @@ class RecepitAddressActivity : AppCompatActivity(), View.OnClickListener {
             adapter = AddressListAdapter(this@RecepitAddressActivity, list)
             addItemDecoration(RecycleViewDivider(this@RecepitAddressActivity, LinearLayout.VERTICAL))
         }
+        ib_back.setOnClickListener{
+            finish()
+        }
     }
 
     override fun onStart() {

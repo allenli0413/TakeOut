@@ -1,10 +1,13 @@
 package com.liyh.takeout.ui.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.liyh.takeout.model.bean.AddressInfo
+import com.liyh.takeout.ui.activity.RecepitAddressActivity
 import com.liyh.takeout.ui.views.AddressListItemView
 
 /**
@@ -24,6 +27,13 @@ class AddressListAdapter(val context: Context, val addressList: List<AddressInfo
         val itemData = addressList[position]
         val itemView = holder.itemView as AddressListItemView
         itemView.bindData(itemData)
+        itemView.setOnClickListener {
+            val activity = context as RecepitAddressActivity
+            val intent = Intent()
+            intent.putExtra("addressInfo", itemData)
+            activity.setResult(Activity.RESULT_OK, intent)
+            activity.finish()
+        }
     }
 
     class AddressListViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
